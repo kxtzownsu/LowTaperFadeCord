@@ -34,8 +34,8 @@ function makeAutoStartLinux(): AutoStart {
             const desktopFile = `
 [Desktop Entry]
 Type=Application
-Name=Vesktop
-Comment=Vesktop autostart script
+Name=LowTaperFadeCord
+Comment=LowTaperFadeCord autostart script
 Exec=${commandLine}
 StartupNotify=false
 Terminal=false

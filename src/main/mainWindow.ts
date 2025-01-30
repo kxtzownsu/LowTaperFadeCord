@@ -99,7 +99,7 @@ function initTray(win: BrowserWindow) {
             }
         },
         {
-            label: "Reset Vesktop",
+            label: "Reset LowTaperFadeCord",
             async click() {
                 await clearData(win);
             }
@@ -124,15 +124,15 @@ function initTray(win: BrowserWindow) {
     ]);
 
     tray = new Tray(ICON_PATH);
-    tray.setToolTip("Vesktop");
+    tray.setToolTip("LowTaperFadeCord");
     tray.setContextMenu(trayMenu);
     tray.on("click", onTrayClick);
 }
 
 async function clearData(win: BrowserWindow) {
     const { response } = await dialog.showMessageBox(win, {
-        message: "Are you sure you want to reset Vesktop?",
-        detail: "This will log you out, clear caches and reset all your settings!\n\nVesktop will automatically restart after this operation.",
+        message: "Are you sure you want to reset LowTaperFadeCord?",
+        detail: "This will log you out, clear caches and reset all your settings!\n\LowTaperFadeCord will automatically restart after this operation.",
         buttons: ["Yes", "No"],
         cancelId: MessageBoxChoice.Cancel,
         defaultId: MessageBoxChoice.Default,
@@ -161,7 +161,7 @@ function initMenuBar(win: BrowserWindow) {
 
     const subMenu = [
         {
-            label: "About Vesktop",
+            label: "About LowTaperFadeCord",
             click: createAboutWindow
         },
         {
@@ -171,14 +171,14 @@ function initMenuBar(win: BrowserWindow) {
                 app.relaunch();
                 app.quit();
             },
-            toolTip: "Vesktop will automatically restart after this operation"
+            toolTip: "LowTaperFadeCord will automatically restart after this operation"
         },
         {
-            label: "Reset Vesktop",
+            label: "Reset LowTaperFadeCord",
             async click() {
                 await clearData(win);
             },
-            toolTip: "Vesktop will automatically restart after this operation"
+            toolTip: "LowTaperFadeCord will automatically restart after this operation"
         },
         {
             label: "Relaunch",
@@ -247,7 +247,7 @@ function initMenuBar(win: BrowserWindow) {
 
     const menu = Menu.buildFromTemplate([
         {
-            label: "Vesktop",
+            label: "LowTaperFadeCord",
             role: "appMenu",
             submenu: subMenu.filter(isTruthy)
         },
@@ -424,7 +424,7 @@ function createMainWindow() {
             transparencyOption !== "none" && {
                 transparent: true
             }),
-        ...(staticTitle && { title: "Vesktop" }),
+        ...(staticTitle && { title: "LowTaperFadeCord" }),
         ...(process.platform === "darwin" && getDarwinOptions()),
         ...getWindowBoundsOptions(),
         autoHideMenuBar: enableMenu

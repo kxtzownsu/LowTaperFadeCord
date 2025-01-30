@@ -1,8 +1,8 @@
 {
-    "name": "vesktop",
+    "name": "LowTaperFadeCord",
     "version": "1.5.4",
     "private": true,
-    "description": "Vesktop is a custom Discord desktop app",
+    "description": "LowTaperFadeCord is a custom Discord desktop app",
     "keywords": [],
     "homepage": "https://vencord.dev/",
     "license": "GPL-3.0",
@@ -64,7 +64,7 @@
     },
     "build": {
         "appId": "dev.vencord.vesktop",
-        "productName": "Vesktop",
+        "productName": "LowTaperFadeCord",
         "files": [
             "!*",
             "!node_modules",
@@ -109,7 +109,7 @@
                 }
             ],
             "desktop": {
-                "Name": "Vesktop",
+                "Name": "LowTaperFadeCord",
                 "GenericName": "Internet Messenger",
                 "Type": "Application",
                 "Categories": "Network;InstantMessaging;Chat;",

@@ -28,7 +28,7 @@ function openDeveloperOptionsModal(settings: Settings) {
         <ModalRoot {...props} size={ModalSize.MEDIUM}>
             <ModalHeader>
                 <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>
-                    Vesktop Developer Options
+                    LowTaperFadeCord Developer Options
                 </Text>
                 <ModalCloseButton onClick={props.onClose} />
             </ModalHeader>
@@ -85,7 +85,7 @@ const VencordLocationPicker: SettingsComponent = ({ settings }) => {
                                 break;
                             case "ok":
                                 Toasts.show({
-                                    message: "Vencord install changed. Fully restart Vesktop to apply.",
+                                    message: "Vencord install changed. Fully restart LowTaperFadeCord to apply.",
                                     id: Toasts.genId(),
                                     type: Toasts.Type.SUCCESS
                                 });

@@ -1,14 +1,20 @@
+# CREDITS TO [Vesktop](https://github.com/Vencord/Vesktop) FOR THE PROJECT! I AM ONLY CHANGING THE BRANDING! THIS IS NOT MY PROJECT. GO GIVE VESKTOP A STAR ON GITHUB
+
+## Below is the original README
+
 # Vesktop
 
 Vesktop is a custom Discord desktop app
 
 **Main features**:
+
 - Vencord preinstalled
 - Much more lightweight and faster than the official Discord app
 - Linux Screenshare with sound & wayland
 - Much better privacy, since Discord has no access to your system
 
 **Not yet supported**:
+
 - Global Keybinds
 - see the [Roadmap](https://github.com/Vencord/Vesktop/issues/324)
 
@@ -52,9 +58,9 @@ If you don't know the difference, pick amd64.
 Below you can find unofficial packages created by the community. They are not officially supported by us, so before reporting issues, please first confirm the issue also happens on official builds. When in doubt, consult with their packager first. The flatpak and AppImage should work on any distro that [supports them](https://flatpak.org/setup/), so I recommend you just use those instead!
 
 - Arch Linux: [Vesktop on the Arch user repository](https://aur.archlinux.org/packages?K=vesktop)
-- NixOS: https://wiki.nixos.org/wiki/Discord#Vesktop
+- NixOS: <https://wiki.nixos.org/wiki/Discord#Vesktop>
 - Slackware: [Vesktop on the SlackBuilds](https://slackbuilds.org/result/?search=vesktop)
-- Windows - Scoop: https://scoop.sh/#/apps?q=Vesktop
+- Windows - Scoop: <https://scoop.sh/#/apps?q=Vesktop>
 
 ## Building from Source
 
