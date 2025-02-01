@@ -7,12 +7,13 @@
 import { app } from "electron";
 import { BrowserWindow } from "electron/main";
 import { copyFileSync, mkdirSync, readdirSync } from "fs";
+import { downloadFile } from './utils/http';
 import { join } from "path";
 import { SplashProps } from "shared/browserWinProperties";
 import { ICON_PATH, VIEW_DIR } from "shared/paths";
 
 import { autoStart } from "./autoStart";
-import { DATA_DIR } from "./constants";
+import { DATA_DIR, VENCORD_THEMES_DIR } from "./constants";
 import { createWindows } from "./mainWindow";
 import { Settings, State } from "./settings";
 import { makeLinksOpenExternally } from "./utils/makeLinksOpenExternally";
@@ -28,8 +29,7 @@ interface Data {
 export function createFirstLaunchTour() {
     const win = new BrowserWindow({
         ...SplashProps,
-        frame: true,
-        autoHideMenuBar: true,
+	    autoHideMenuBar: true,
         height: 470,
         width: 550,
         icon: ICON_PATH

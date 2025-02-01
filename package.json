@@ -11,7 +11,7 @@
     "scripts": {
         "build": "tsx scripts/build/build.mts",
         "build:dev": "pnpm build --dev",
-        "package": "pnpm build && electron-builder",
+        "package": "pnpm build:dev && electron-builder",
         "package:dir": "pnpm build && electron-builder --dir",
         "lint": "eslint",
         "lint:fix": "pnpm lint --fix",

@@ -1,14 +1,15 @@
 /**
  * @name lowtaperfadecord
  * @version low.taper.fade
- * @description a MASSIVE theme for LowTaperFadeCord
+ * @description a MASSIVE theme for LowTaperFadeCord (deleting this on LowTaperFadeCord will cause it to re-download and re-enable automatically, this will also auto-update on LowTaperFadeCord on every launch)
+ * @author sophiaasophieee
 */
 
 @import url('https://discordstyles.github.io/FrostedGlass/dist/FrostedGlass.css');
 @import url('https://discordstyles.github.io/Addons/windows-titlebar.css');
 
 :root {
-  --background-image: url('https://github.com/kxtzownsu/LowTaperFadeCord/blob/main/static/shiggy.gif');
+  --background-image: url('https://github.com/kxtzownsu/LowTaperFadeCord/raw/main/static/icon.png');
   --background-image-blur: 0px;
   --background-image-size: cover;
   --background-image-position: center;
@@ -28,12 +29,12 @@
   --middle-brightness: 0.6;
   --right-brightness: 0;
   --overlay-brightness: 0.75;
-  --gradient-primary: 10,34,61;
-  --gradient-secondary: 19,71,148;
-  --link-colour: #FBD822;
-  --scrollbar-colour: rgba(255,255,255,0.05);
+  --gradient-primary: 10, 34, 61;
+  --gradient-secondary: 19, 71, 148;
+  --link-colour: #74c7ec;
+  --scrollbar-colour: rgba(255, 255, 255, 0.05);
   --gradient-direction: 320deg;
-  --tint-colour: 255,51,159;
+  --tint-colour: 255, 51, 159;
   --tint-brightness: 0;
   --font: gg sans;
   --window-padding: 20px;
@@ -41,6 +42,7 @@
   --update-notice-1: none;
 }
 
-/* Any custom CSS below here */
-
-
+/* This'll work until Discord changes the class name :3 */
+.scroller_ef3116 {
+  flex: 1 1 auto;
+}

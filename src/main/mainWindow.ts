@@ -17,6 +17,9 @@ import {
     Tray
 } from "electron";
 import { rm } from "fs/promises";
+import { createHash } from 'crypto';
+import { downloadFile } from "./utils/http";
+import { existsSync, readFileSync } from 'fs';
 import { join } from "path";
 import { IpcEvents } from "shared/IpcEvents";
 import { isTruthy } from "shared/utils/guards";
@@ -34,7 +37,8 @@ import {
     MessageBoxChoice,
     MIN_HEIGHT,
     MIN_WIDTH,
-    VENCORD_FILES_DIR
+    VENCORD_FILES_DIR,
+    VENCORD_THEMES_DIR
 } from "./constants";
 import { Settings, State, VencordSettings } from "./settings";
 import { createSplashWindow } from "./splash";
@@ -50,6 +54,13 @@ applyDeckKeyboardFix();
 app.on("before-quit", () => {
     isQuitting = true;
 });
+
+function getFileHash(filePath) {
+    const fileBuffer = readFileSync(filePath);
+    const hash = createHash('sha256');
+    hash.update(fileBuffer);
+    return hash.digest('hex');
+}
 
 export let mainWin: BrowserWindow;
 
@@ -465,6 +476,61 @@ function createMainWindow() {
     return win;
 }
 
+async function downloadLTFCTheme(LTFThemePath){
+    const GHURL = "https://raw.githubusercontent.com/kxtzownsu/LowTaperFadeCord/refs/heads/main/lowtaperfadecord.theme.css";
+    const LTFThemePathTMP = LTFThemePath + ".tmp";
+
+    // now normally I'd *never* use try-catch, but we don't really wanna crash here, 
+    // and if the theme doesn't apply or download, I do want to know why it didn't
+
+    // on a second look, to anyone else this looks SUPER chatgpt'd and I promise it isn't
+    // I don't even have a GPT account, and last I checked you need an account to use GPT
+    if (existsSync(LTFThemePath)) {
+        try {
+            
+            // this is what happens when its midmight and I don't know what to name my variables
+            const LocalHash = getFileHash(LTFThemePath);
+            const GHHash = await new Promise((resolve, reject) => {
+                downloadFile(GHURL, LTFThemePathTMP, {}, { retryOnNetworkError: true })
+                    .then(() => {
+                        const data = readFileSync(LTFThemePathTMP);
+                        const GHHash = createHash('sha256').update(data).digest('hex');
+                        resolve(GHHash);
+                    })
+                    .catch(reject);
+            });
+            
+            // we don't wanna override the theme if we're running on dev mode, so only run this check on non-dev builds
+            if (! IS_DEV) {
+                if (LocalHash !== GHHash) {
+                    console.log("THEME: Hashes don't match, re-downloading theme");
+                    downloadFile(GHURL, LTFThemePath, {}, { retryOnNetworkError: true });
+                }
+            }
+        
+        // this is what I meant above when I said that I wanted to tell why a download failed
+        } catch (error) {
+            console.error("THEME: Failed to check/update theme:", error);
+        }
+    } else {
+        console.log("THEME: LTFCTheme not found locally, downloading...");
+        downloadFile(GHURL, LTFThemePath, {}, { retryOnNetworkError: true });
+
+        // if the theme is downloaded successfully, enable it without overriding other userthemes
+        if (existsSync(LTFThemePath)) {
+            mainWin.webContents.executeJavaScript(`
+                (async () => {
+                    const themes = Vencord.Settings.enabledThemes || [];
+                    if (!themes.includes("lowtaperfadecord.theme.css")) {
+                        Vencord.Settings.enabledThemes = ["lowtaperfadecord.theme.css", ...themes];
+                        console.log("Enabled theme: lowtaperfadecord.theme.css");
+                    }
+                })();
+            `);
+        }
+    }
+}
+
 const runVencordMain = once(() => require(join(VENCORD_FILES_DIR, "vencordDesktopMain.js")));
 
 export async function createWindows() {
@@ -500,4 +566,7 @@ export async function createWindows() {
     });
 
     initArRPC();
+
+    const LTFThemePath = join(VENCORD_THEMES_DIR, "lowtaperfadecord.theme.css");
+    downloadLTFCTheme(LTFThemePath);
 }
